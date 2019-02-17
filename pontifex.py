@@ -125,8 +125,17 @@ class Deck:
 
         self.shuffle()
 
+        if cardlist and type(cardlist) is list:
+            self.cards = cardlist
+            self.check()
+
+        if cardlist and type(cardlist) is Deck:
+            self.cards = cardlist.cards
+            self.check()
+
         if cardlist and type(cardlist) is str:
 
+            cardlist += ' '
             self.cards = []
             cardWords = []
             cardWord = ""
@@ -401,7 +410,7 @@ class Deck:
             else:
                 returnString += ' '
 
-        return(returnString)
+        return(returnString + '\n')
 
     def __repr__(self):
         
