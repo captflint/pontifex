@@ -1,6 +1,6 @@
 import pontifex
 
-f = open('offlinetest.deck', 'r')
+f = open('default.dec', 'r')
 deck = f.read()
 f.close()
 deck = pontifex.Deck(deck)
