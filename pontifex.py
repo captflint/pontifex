@@ -386,7 +386,7 @@ class Deck:
                     returnCard = str(c)
 
                     if returnCard == '1':
-                        returnCard == 'A'
+                        returnCard = 'A'
 
                 else:
                     c -= 11
