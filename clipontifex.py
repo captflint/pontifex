@@ -5,6 +5,7 @@ actions = [
         'decrypt',
         'shuffle',
         'phonetic',
+        'key',
         'write' ]
 
 parser = argparse.ArgumentParser('clipontifex.py')
@@ -12,6 +13,7 @@ parser.add_argument('action', choices=actions, help="action to perform")
 parser.add_argument('-d', '--deck', nargs='?', default='default.dec')
 parser.add_argument('-m', '--message', nargs='?', default='message.txt')
 parser.add_argument('-b', '--backup', action='store_true', help='Save old deck')
+parser.add_argument('-k', '--key', nargs='?', default='')
 args = parser.parse_args()
 
 def openDeck():
@@ -81,6 +83,12 @@ def phonetic():
     message = openMessage()
     print(message.phonetic())
 
+def key():
+
+    deck = pontifex.Deck()
+    deck.key(args.key)
+    saveDeck(deck)
+
 def write():
 
     deck = openDeck()
@@ -95,6 +103,7 @@ actiondict = {
         'decrypt': decrypt,
         'shuffle': shuffle,
         'phonetic': phonetic,
+        'key': key,
         'write': write
         }
 
