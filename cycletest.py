@@ -1,25 +1,27 @@
 from pontifex import Deck
+import random
 
 decks = []
 
-def check4dups(deck):
-
-    if deck.cards in decks:
-        print("CYCLE FOUND!!!\n" * 10)
-        print(str(deck))
-        print('index', decks.index(deck.cards))
-        f = open('cyclefound.dec', 'w')
-        f.write(str(deck))
-        f.close()
-
-    else:
-        decks.append(deck.cards)
-
 deck = Deck()
 
-while len(decks) < 1000000:
-    check4dups(deck)
-    n = deck.nextNumber()
-    l = len(decks)
-    if l % 1000 == 0:
-        print(l, n)
+while len(decks) < 2000000:
+    decks.append(deck.cards)
+    deck.nextNumber()
+
+def test():
+    
+    random.seed()
+    decks.append(deck.cards)
+    random.shuffle(decks)
+
+#test()
+
+if deck.cards in decks:
+    print('Cycle detected')
+    print('Index is', decks.index(deck.cards))
+    print('--------------')
+    print(deck)
+
+else:
+    print('No cycle detected')
