@@ -9,6 +9,9 @@ class Message:
 
         self.numbers = []
 
+        if type(data) is Message:
+            data = data.numbers
+
         if type(data) is list:
             
             for n in data:
@@ -27,6 +30,14 @@ class Message:
 
         while len(self.numbers) % 5 != 0:
             self.numbers.append(self.alphabet.index('X') + 1)
+
+    def __eq__(self, other):
+
+        if type(other) is Message:
+            return(self.numbers == other.numbers)
+
+        else:
+            return(False)
 
     def letters(self):
 
@@ -330,6 +341,30 @@ class Deck:
             card -= 26
 
         return(card)
+
+    def key(self, k):
+
+        self.cards.sort()
+
+        if type(k) is str:
+            k = k.upper()
+            alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+
+            for c in k:
+
+                if c in alphabet:
+                    self.step1()
+                    self.step2()
+                    self.step3()
+                    self.step4()
+
+                    i = alphabet.index(c) + 1
+                    bottom = self.cards[-1]
+                    rest = self.cards[:-1]
+                    upper = rest[:i]
+                    lower = rest[i:]
+
+                    self.cards = lower + upper + [bottom]
 
     def encrypt(self, message):
 
